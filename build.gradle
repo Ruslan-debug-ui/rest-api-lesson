@@ -27,7 +27,8 @@ dependencies {
             "io.rest-assured:rest-assured:5.1.0",
             "org.junit.jupiter:junit-jupiter:5.8.2",
             "org.slf4j:slf4j-simple:1.7.36",
-            "io.qameta.allure:allure-selenide:2.19.0"
+            "io.qameta.allure:allure-selenide:2.19.0",
+            "com.google.code.gson:gson:2.11.0"
     )
 }
 
