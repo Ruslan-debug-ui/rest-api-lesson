@@ -4,6 +4,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import static io.restassured.RestAssured.given;
@@ -14,6 +15,11 @@ public class SetmeterTests {
 
     private Object www;
     public String woo;
+
+    @BeforeAll
+    static void initDB() {
+        System.out.println("### @BeforeAll");
+    }
 
     @Test
     void tokenGetTest() {
