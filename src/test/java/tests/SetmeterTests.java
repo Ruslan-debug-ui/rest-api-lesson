@@ -1,5 +1,6 @@
 package tests;
 
+import com.codeborne.selenide.Configuration;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import io.restassured.RestAssured;
@@ -19,6 +20,7 @@ public class SetmeterTests {
     @BeforeAll
     static void initDB() {
         System.out.println("REST API Tests");
+        Configuration.baseUrl = "https://api1.setmeter.ru/api";
     }
 
     @Test
