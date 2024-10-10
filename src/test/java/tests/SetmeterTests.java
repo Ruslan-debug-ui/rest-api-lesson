@@ -18,7 +18,7 @@ public class SetmeterTests {
 
     @BeforeAll
     static void initDB() {
-        System.out.println("### @BeforeAll");
+        System.out.println("REST API Tests");
     }
 
     @Test
@@ -62,4 +62,19 @@ public class SetmeterTests {
 
          //       .body("token", is("QpwL5tke4Pnpja7X4"));
     }
+    @Test
+    void expiredTokenTest() {
+
+        String expired_token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im1lZGlhc2NvcGVfYXBpIiwic2NvcGUiOiJhY2Nlc3MiLCJpYXQiOjE3Mjg1NjQxNDgsImV4cCI6MTcyODU2Nzc0OH0.rLFNmJ9SFT9YWX3tPd6i3A8O2QcmBhkMSGOOkr2C1v8";
+
+        given().auth().oauth2(expired_token)
+     //           .log().all()
+                .get("https://api1.setmeter.ru/api/v1/users/stlw455wpb")
+                .then()
+      //          .log().all()
+     //           .statusCode(401)
+                .body("detail",is("TOKEN_EXPIRED"));
+    }
+
+
 }
