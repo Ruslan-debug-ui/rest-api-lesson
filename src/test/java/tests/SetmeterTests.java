@@ -8,6 +8,7 @@ import io.restassured.response.Response;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import static io.restassured.RestAssured.*;
 import static io.restassured.RestAssured.given;
 import static io.restassured.http.ContentType.JSON;
 import static org.hamcrest.Matchers.is;
@@ -20,7 +21,7 @@ public class SetmeterTests {
     @BeforeAll
     static void initDB() {
         System.out.println("REST API Tests");
-        Configuration.baseUrl = "https://api1.setmeter.ru/api";
+        RestAssured.baseURI = "https://api1.setmeter.ru/api/v1";
     }
 
     @Test
@@ -29,7 +30,7 @@ public class SetmeterTests {
 //                "\"password\": \"cityslicka\" }";
         String body = "{\"username\": \"mediascope_api\", \"password\": \"p3C36dpFg%zNMkVxByqy\"}";
 
-        Response response = RestAssured.given()
+        Response response = given()
            //    .auth().basic("mediascope_api", "p3C36dpFg%zNMkVxByqy")
            //     .header("Content-Type","application/x-www-form-urlencoded")
            //     .log().uri()
@@ -40,7 +41,7 @@ public class SetmeterTests {
          //       .body(body)
                 .contentType("application/x-www-form-urlencoded; charset=utf-8")
                 .when()
-                .post("https://api1.setmeter.ru/api/v1/auth/token")
+                .post("/auth/token")
                 .then()
 //                .log().status()
 //                .log().body()
@@ -57,7 +58,7 @@ public class SetmeterTests {
 
         response = given().auth().oauth2(woo)
                 .log().all()
-                .get("https://api1.setmeter.ru/api/v1/users/stlw455wpb")
+                .get("/users/stlw455wpb")
                 .then()
                 .log().all()
                 .extract().response();
@@ -71,7 +72,7 @@ public class SetmeterTests {
 
         given().auth().oauth2(expired_token)
      //           .log().all()
-                .get("https://api1.setmeter.ru/api/v1/users/stlw455wpb")
+                .get("/users/stlw455wpb")
                 .then()
       //          .log().all()
      //           .statusCode(401)
