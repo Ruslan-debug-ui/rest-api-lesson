@@ -29,7 +29,8 @@ dependencies {
             "org.slf4j:slf4j-simple:1.7.36",
             "io.qameta.allure:allure-selenide:2.19.0",
             "com.google.code.gson:gson:2.11.0",
-            "com.codeborne:selenide:6.19.1"
+            "com.codeborne:selenide:6.19.1",
+            "io.rest-assured:json-schema-validator:5.3.1"
 
     )
 }

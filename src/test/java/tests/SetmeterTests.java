@@ -1,16 +1,15 @@
 package tests;
 
-import com.codeborne.selenide.Configuration;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import utils.Utils;
 
-import static io.restassured.RestAssured.*;
 import static io.restassured.RestAssured.given;
-import static io.restassured.http.ContentType.JSON;
+import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
 import static org.hamcrest.Matchers.is;
 
 public class SetmeterTests {
@@ -18,11 +17,15 @@ public class SetmeterTests {
     private Object www;
     public String woo;
 
+
+
     @BeforeAll
     static void initDB() {
         System.out.println("REST API Tests");
         RestAssured.baseURI = "https://api1.setmeter.ru/api/v1";
     }
+
+
 
     @Test
     void tokenGetTest() {
@@ -46,17 +49,13 @@ public class SetmeterTests {
 //                .log().status()
 //                .log().body()
                 .statusCode(200)
+                .body(matchesJsonSchemaInClasspath("schema_token_response.json"))
                 .extract().response();
 
-        String readableTest = response.asPrettyString();
-//        System.out.println(readableTest);
+        String wood = Utils.getValueFromJson(response, "access_token");
 
-        JsonObject jsonObject = JsonParser.parseString(readableTest)
-                .getAsJsonObject();
-        String woo = jsonObject.get("access_token").getAsString();
- //       System.out.println(woo);
 
-        response = given().auth().oauth2(woo)
+        response = given().auth().oauth2(wood)
                 .log().all()
                 .get("/users/stlw455wpb")
                 .then()
