@@ -52,29 +52,31 @@ public class SetmeterTests {
                 .body(matchesJsonSchemaInClasspath("schema_token_response.json"))
                 .extract().response();
 
-        String wood = Utils.getValueFromJson(response, "access_token");
+        //      String wood = Utils.getValueFromJson(response, "access_token");
 
 
-        response = given().auth().oauth2(wood)
-                .log().all()
-                .get("/users/stlw455wpb")
-                .then()
-                .log().all()
-                .extract().response();
+//        response = given().auth().oauth2(wood)
+//                .log().all()
+//                .get("/users/stlw455wpb")
+//                .then()
+//                .log().all()
+//                .extract().response();
 
          //       .body("token", is("QpwL5tke4Pnpja7X4"));
     }
     @Test
     void expiredTokenTest() {
 
-        String expired_token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im1lZGlhc2NvcGVfYXBpIiwic2NvcGUiOiJhY2Nlc3MiLCJpYXQiOjE3Mjg1NjQxNDgsImV4cCI6MTcyODU2Nzc0OH0.rLFNmJ9SFT9YWX3tPd6i3A8O2QcmBhkMSGOOkr2C1v8";
+     //   String token = Utils.tokenGetProc();
+
+              String expired_token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im1lZGlhc2NvcGVfYXBpIiwic2NvcGUiOiJhY2Nlc3MiLCJpYXQiOjE3Mjg1NjQxNDgsImV4cCI6MTcyODU2Nzc0OH0.rLFNmJ9SFT9YWX3tPd6i3A8O2QcmBhkMSGOOkr2C1v8";
 
         given().auth().oauth2(expired_token)
      //           .log().all()
                 .get("/users/stlw455wpb")
                 .then()
       //          .log().all()
-     //           .statusCode(401)
+                .statusCode(401)
                 .body("detail",is("TOKEN_EXPIRED"));
     }
 
