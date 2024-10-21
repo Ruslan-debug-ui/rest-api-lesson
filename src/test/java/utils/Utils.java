@@ -23,8 +23,8 @@ public class Utils {
 
         Response response = given()
 
-                .formParam("username", "mediascope_api")
-                .formParam("password", "p3C36dpFg%zNMkVxByqy")
+                .formParam("username", "test_api")
+                .formParam("password", "A9dxTQLMA")
                 .contentType("application/x-www-form-urlencoded; charset=utf-8")
                 .when()
                 .post("/auth/token")

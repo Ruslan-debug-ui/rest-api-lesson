@@ -38,8 +38,8 @@ public class SetmeterTests {
            //     .header("Content-Type","application/x-www-form-urlencoded")
            //     .log().uri()
           //      .log().body()
-                .formParam("username", "mediascope_api")
-                .formParam("password", "p3C36dpFg%zNMkVxByqy")
+                .formParam("username", "test_api")
+                .formParam("password", "A9dxTQLMA")
          //       .log().all()
          //       .body(body)
                 .contentType("application/x-www-form-urlencoded; charset=utf-8")
@@ -79,6 +79,38 @@ public class SetmeterTests {
                 .statusCode(401)
                 .body("detail",is("TOKEN_EXPIRED"));
     }
+
+    @Test
+    void myDeviceLoginTest() {
+
+           String token = Utils.tokenGetProc();
+
+
+        given().auth().oauth2(token)
+                //           .log().all()
+                .get("/users/stlw455wpb")
+                .then()
+        //        .log().all()
+                .statusCode(200)
+                .body("role",is("meter"));
+    }
+
+    @Test
+    void myLoginTest() {
+
+        String token = Utils.tokenGetProc();
+
+
+        given().auth().oauth2(token)
+                //           .log().all()
+                .get("/users/me")
+                .then()
+              //  .log().all()
+                .statusCode(200)
+                .body("role",is("guest"));
+    }
+
+
 
 
 }
